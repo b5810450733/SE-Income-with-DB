@@ -13,6 +13,8 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 
 public class AccountController implements Showlist{
     @FXML
@@ -53,7 +55,7 @@ public class AccountController implements Showlist{
     @FXML
     public void initialize(){
         showAlllist();
-        allTable.setEditable(true);
+        //allTable.setEditable(true);
         typetable.setCellFactory(TextFieldTableCell.forTableColumn());
         informtable.setCellFactory(TextFieldTableCell.forTableColumn());
         amounttable.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -63,6 +65,39 @@ public class AccountController implements Showlist{
     public void setAmountfield(){
         totalbalance.setStyle("-fx-text-fill: green");
         totalbalance.setText(newAmount.getTotalAmount()+"");
+    }
+
+    @FXML
+    public void handleModbtn(ActionEvent event){
+        int countMod = 1;
+        Income modIncome = allTable.getSelectionModel().getSelectedItem();
+        if (event.getSource().equals(modbt) && countMod == 1){
+            addbt.setDisable(true);
+            delBtn.setDisable(true);
+            typecolumn.setValue(allTable.getSelectionModel().getSelectedItem().getType());
+            commentF.setText(allTable.getSelectionModel().getSelectedItem().getInformation());
+            amountField.setText(allTable.getSelectionModel().getSelectedItem().getAmount());
+            modbt.setText("Save");
+            countMod++;
+        }if (event.getSource().equals(modbt) && countMod == 2){
+            try {
+//                modIncome.setType(typecolumn.getValue().toString());
+//                modIncome.setAmount(amountField.getText());
+//                modIncome.setInformation(commentF.getText());
+                Income demo = new Income(typecolumn.getValue().toString(),commentF.getText(),Double.parseDouble(amountField.getText()));
+                for (int i = 0; i < data.size() ; i++) {
+                    if (data.get(i).equals(allTable.getSelectionModel().getSelectedItem())){
+                        data.set(i,demo);
+                    }
+                }
+                System.out.println(demo);
+                System.out.println(countMod);
+                System.out.println("Complete");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @FXML

@@ -21,7 +21,7 @@
       <ComboBox fx:id="typecolumn" layoutX="29.0" layoutY="387.0" prefWidth="150.0" promptText="Type" />
       <TextField fx:id="amountField" layoutX="199.0" layoutY="387.0" prefHeight="27.0" prefWidth="212.0" promptText="Amount" />
       <Button fx:id="addbt" layoutX="435.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddbtn" prefHeight="27.0" prefWidth="81.0" text="ADD LIST" />
-      <Button fx:id="modbt" layoutX="531.0" layoutY="387.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="MODIFY" />
+      <Button fx:id="modbt" layoutX="531.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleModbtn" prefHeight="27.0" prefWidth="81.0" text="MODIFY" />
       <TextField fx:id="commentF" layoutX="129.0" layoutY="429.0" prefHeight="27.0" prefWidth="382.0" promptText="Comment" />
       <Label fx:id="totalbalance" contentDisplay="CENTER" layoutX="150.0" layoutY="6.0" prefHeight="35.0" prefWidth="462.0">
          <font>
