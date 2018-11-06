@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AccountController">
+   <children>
+      <TableView fx:id="allTable" layoutX="29.0" layoutY="49.0" prefHeight="321.0" prefWidth="583.0">
+         <columns>
+            <TableColumn fx:id="typetable" prefWidth="146.0" text="Type" />
+            <TableColumn fx:id="informtable" prefWidth="282.0" text="Information" />
+            <TableColumn fx:id="amounttable" prefWidth="154.0" text="Amount" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="typecolumn" layoutX="29.0" layoutY="387.0" prefWidth="150.0" promptText="Type" />
+      <TextField fx:id="amountField" layoutX="199.0" layoutY="387.0" prefHeight="27.0" prefWidth="212.0" promptText="Amount" />
+      <Button fx:id="addbt" layoutX="435.0" layoutY="387.0" mnemonicParsing="false" onAction="#handleAddbtn" prefHeight="27.0" prefWidth="81.0" text="ADD LIST" />
+      <Button fx:id="modbt" layoutX="531.0" layoutY="387.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="MODIFY" />
+      <TextField fx:id="commentF" layoutX="129.0" layoutY="429.0" prefHeight="27.0" prefWidth="382.0" promptText="Comment" />
+      <Label fx:id="totalbalance" contentDisplay="CENTER" layoutX="150.0" layoutY="6.0" prefHeight="35.0" prefWidth="462.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="7.0" prefHeight="35.0" prefWidth="121.0" text="YOUR BALANCE :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="delBtn" layoutX="531.0" layoutY="429.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="DELETE" />
+   </children>
+</AnchorPane>
