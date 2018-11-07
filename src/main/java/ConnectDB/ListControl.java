@@ -80,6 +80,24 @@ public class ListControl {
         return updateResult;
     }
 
+    public boolean deleteList(Income list){
+        boolean updateResult = false;
+        try{
+            String sqlText = "DELETE FROM Income WHERE id=?";
+            PreparedStatement prepare = connection.prepareStatement(sqlText);
+            prepare.setInt(1,list.getID());
+
+            if (prepare.executeUpdate() == 1){
+                updateResult = true;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            SQLConnect.closeAllConfigure(resultSet,stmt,connection);
+        }
+        return updateResult;
+    }
+
     public int getLastID(){
         int lastID = 0;
         try{

@@ -33,6 +33,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button fx:id="delBtn" layoutX="531.0" layoutY="429.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="81.0" text="DELETE" />
+      <Button fx:id="delBtn" layoutX="531.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleDelbtn" prefHeight="27.0" prefWidth="81.0" text="DELETE" />
+      <Button fx:id="cancelbtn" disable="true" layoutX="29.0" layoutY="429.0" mnemonicParsing="false" onAction="#handleModbtn" prefHeight="27.0" prefWidth="81.0" text="CANCEL" />
    </children>
 </AnchorPane>

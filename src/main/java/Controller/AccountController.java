@@ -38,7 +38,7 @@ public class AccountController implements Showlist{
     private Button addbt;
 
     @FXML
-    private Button modbt,delBtn;
+    private Button modbt,delBtn,cancelbtn;
 
     @FXML
     private TextField commentF;
@@ -75,6 +75,7 @@ public class AccountController implements Showlist{
             typecolumn.setValue(allTable.getSelectionModel().getSelectedItem().getType());
             commentF.setText(allTable.getSelectionModel().getSelectedItem().getInformation());
             amountField.setText(allTable.getSelectionModel().getSelectedItem().getAmount());
+            cancelbtn.setDisable(false);
             modbt.setText("Save");
         }
         else if (event.getSource().equals(modbt) && modbt.getText().equals("Save")){
@@ -104,8 +105,39 @@ public class AccountController implements Showlist{
             }catch (Exception e){
                 e.printStackTrace();
             }
+        }else if (event.getSource().equals(cancelbtn)){
+            typecolumn.setValue("Choose Type");
+            modbt.setText("MODIFY");
+            addbt.setDisable(false);
+            delBtn.setDisable(false);
+            commentF.clear();
+            amountField.clear();
+            cancelbtn.setDisable(true);
         }
     }
+
+    @FXML
+    public void handleDelbtn(ActionEvent event){
+        Income toDel = allTable.getSelectionModel().getSelectedItem();
+        if (event.getSource().equals(delBtn)){
+            if (toDel.getType().equals("Income")){
+                newAmount.setTotalAmount(0,Double.parseDouble(toDel.getAmount()));
+            }
+            if (toDel.getType().equals("Expense")){
+                newAmount.setTotalAmount(1,Double.parseDouble(toDel.getAmount()));
+            }
+            SQLConnect db = new SQLConnect();
+            Connection connection = db.openDatabase();
+            ListControl dbControl = new ListControl(connection);
+            System.out.println(dbControl.deleteList(toDel));
+            data.remove(toDel);
+            setAmountfield();
+            typecolumn.setValue("Choose Type");
+        }
+
+    }
+
+
 
     @FXML
     public void showList() throws NullPointerException{
@@ -117,7 +149,7 @@ public class AccountController implements Showlist{
             System.out.print(i);
         }
         for (int i = 0; i < incomeList.size() ; i++) {
-            in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount())); // แก้ตรงนี้ด้วย
+            in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount()));
             in.setID(incomeList.get(i).getID());
             if (in.getType().equals("Income")) {
                 newAmount.setTotalAmount(1,Double.parseDouble(in.getAmount()));
@@ -127,9 +159,6 @@ public class AccountController implements Showlist{
             data.add(in);
         }
         setAmountfield();
-//        totalbalance.setStyle("-fx-text-fill: green");
-//        totalbalance.setText(newAmount.getTotalAmount()+"");
-
     }
 
     @FXML
