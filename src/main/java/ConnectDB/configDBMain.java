@@ -11,24 +11,30 @@ public class configDBMain {
         Connection connection = db.openDatabase();
         ListControl addDBControl = new ListControl(connection);
 
-//        Income r1 = new Income("Income","Bag",1500);
-//        System.out.println(addDBControl.addList(r1));
+
+
+//        Income r1 = new Income("Income","Miniso",9000);
+//        r1.setID(8);
+//        System.out.println(addDBControl.updateList(r1));
+//
+//        SQLConnect db1 = new SQLConnect();
+//        Connection connection1 = db1.openDatabase();
+//        ListControl addDBControl1 = new ListControl(connection1);
+//        System.out.println(addDBControl1.getLastID());
+
 //        ArrayList<Room> roomList = rcb.readRoom();
 //        for (Room i:roomList) {
 //            System.out.println(i);
 //
 //        }
 
-//        User user = new User("000","admin","Admin",
-//                "Superadmin","8888888888","adminHR@hr.com","adminadmin");
-//        System.out.println(userDBControl.addUser(user));
 
         /////////////////////////////////////////////////////// เอาไว้อ่านข้อมูลจาก database
 
-        ArrayList<Income> userList = addDBControl.readAccount();
-        for (Income i: userList) {
-            System.out.println(i);
-        }
+//        ArrayList<Income> userList = addDBControl.readAccount();
+//        for (Income i: userList) {
+//            System.out.println(i);
+//        }
     }
 
 

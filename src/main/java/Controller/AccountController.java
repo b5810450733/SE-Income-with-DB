@@ -69,35 +69,30 @@ public class AccountController implements Showlist{
 
     @FXML
     public void handleModbtn(ActionEvent event){
-        int countMod = 1;
         Income modIncome = allTable.getSelectionModel().getSelectedItem();
-        if (event.getSource().equals(modbt) && countMod == 1){
+        if (event.getSource().equals(modbt) && modbt.getText().equals("MODIFY")){
             addbt.setDisable(true);
             delBtn.setDisable(true);
             typecolumn.setValue(allTable.getSelectionModel().getSelectedItem().getType());
             commentF.setText(allTable.getSelectionModel().getSelectedItem().getInformation());
             amountField.setText(allTable.getSelectionModel().getSelectedItem().getAmount());
             modbt.setText("Save");
-            countMod++;
-        }if (event.getSource().equals(modbt) && countMod == 2){
+        }
+        else if (event.getSource().equals(modbt) && modbt.getText().equals("Save")){
             try {
-//                modIncome.setType(typecolumn.getValue().toString());
-//                modIncome.setAmount(amountField.getText());
-//                modIncome.setInformation(commentF.getText());
-                Income demo = new Income(typecolumn.getValue().toString(),commentF.getText(),Double.parseDouble(amountField.getText()));
-                for (int i = 0; i < data.size() ; i++) {
-                    if (data.get(i).equals(allTable.getSelectionModel().getSelectedItem())){
-                        data.set(i,demo);
-                    }
-                }
-                System.out.println(demo);
-                System.out.println(countMod);
+                SQLConnect db = new SQLConnect();
+                Connection connection = db.openDatabase();
+                ListControl dbControl = new ListControl(connection);
+                modIncome.setType(typecolumn.getValue().toString());
+                modIncome.setAmount(amountField.getText());
+                modIncome.setInformation(commentF.getText());
+                System.out.println(modIncome.getID());
+                System.out.println(dbControl.updateList(modIncome));
                 System.out.println("Complete");
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
-
     }
 
     @FXML
@@ -109,6 +104,7 @@ public class AccountController implements Showlist{
         for (Income i :incomeList) {
             System.out.print(i);
         }
+
         for (int i = 0; i < incomeList.size() ; i++) {
             in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount()));
             if (in.getType().equals("Income")) {
@@ -157,8 +153,14 @@ public class AccountController implements Showlist{
                     if (type.equals("Expense")){
                         newAmount.setTotalAmount(0,Double.parseDouble(amountField.getText()));
                     }
+                    SQLConnect db1 = new SQLConnect();
+                    Connection connection1 = db1.openDatabase();
+                    ListControl addDBControl1 = new ListControl(connection1);
+
                     Income in = new Income(type,commentF.getText(),Double.parseDouble(amountField.getText()));
                     dbControl.addList(in);
+                    int newId = addDBControl1.getLastID();
+                    in.setID(newId);
                     data.add(in);
                     amountField.clear();
                     commentF.clear();

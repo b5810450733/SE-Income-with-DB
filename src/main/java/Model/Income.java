@@ -6,6 +6,7 @@ public class Income {
     public SimpleStringProperty amount; // รวม
     public SimpleStringProperty type; // ประเภท
     public SimpleStringProperty information; // ข้อมูล
+    public int ID;
 
     public Income(String type, String comment, double income) {
         this.type = new SimpleStringProperty(type);
@@ -16,6 +17,14 @@ public class Income {
     public Income() {
     }
 
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
     public String getAmount() {
         return amount.get();
     }
@@ -54,6 +63,6 @@ public class Income {
 
     @Override
     public String toString() {
-        return "Type = "+getType()+"Comment = "+getInformation()+"Amount = "+getAmount();
+        return "ID = "+getID()+"Type = "+getType()+"Comment = "+getInformation()+"Amount = "+getAmount();
     }
 }
