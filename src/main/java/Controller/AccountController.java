@@ -13,8 +13,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+
 
 public class AccountController implements Showlist{
     @FXML
@@ -84,11 +83,24 @@ public class AccountController implements Showlist{
                 Connection connection = db.openDatabase();
                 ListControl dbControl = new ListControl(connection);
                 modIncome.setType(typecolumn.getValue().toString());
+
+                if (modIncome.getType().equals("Income")){
+                    newAmount.setTotalAmount(0,Double.parseDouble(modIncome.getAmount()));
+                    newAmount.setTotalAmount(1,Double.parseDouble(amountField.getText()));
+                }
+                if (modIncome.getType().equals("Expense")){
+                    newAmount.setTotalAmount(1,Double.parseDouble(modIncome.getAmount()));
+                    newAmount.setTotalAmount(0,Double.parseDouble(amountField.getText()));
+                }
                 modIncome.setAmount(amountField.getText());
                 modIncome.setInformation(commentF.getText());
-                System.out.println(modIncome.getID());
                 System.out.println(dbControl.updateList(modIncome));
-                System.out.println("Complete");
+                setAmountfield();
+                modbt.setText("MODIFY");
+                addbt.setDisable(false);
+                delBtn.setDisable(false);
+                commentF.clear();
+                amountField.clear();
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -104,9 +116,9 @@ public class AccountController implements Showlist{
         for (Income i :incomeList) {
             System.out.print(i);
         }
-
         for (int i = 0; i < incomeList.size() ; i++) {
-            in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount()));
+            in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount())); // แก้ตรงนี้ด้วย
+            in.setID(incomeList.get(i).getID());
             if (in.getType().equals("Income")) {
                 newAmount.setTotalAmount(1,Double.parseDouble(in.getAmount()));
             }if (in.getType().equals("Expense")){
@@ -114,8 +126,9 @@ public class AccountController implements Showlist{
             }
             data.add(in);
         }
-        totalbalance.setStyle("-fx-text-fill: green");
-        totalbalance.setText(newAmount.getTotalAmount()+"");
+        setAmountfield();
+//        totalbalance.setStyle("-fx-text-fill: green");
+//        totalbalance.setText(newAmount.getTotalAmount()+"");
 
     }
 

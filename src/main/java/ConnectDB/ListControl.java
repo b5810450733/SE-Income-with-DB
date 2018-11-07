@@ -61,14 +61,13 @@ public class ListControl {
 
     public boolean updateList(Income list){
         boolean updateResult = false;
-        System.out.println(list.getID());
         try{
             String sqlText = "UPDATE Income SET type=?,info=?,value=? WHERE id=?";
             PreparedStatement prepare = connection.prepareStatement(sqlText);
-            prepare.setInt(4,list.getID());
             prepare.setString(1,list.getType());
             prepare.setString(2,list.getInformation());
             prepare.setDouble(3,Double.parseDouble(list.getAmount()));
+            prepare.setInt(4,list.getID());
 
             if (prepare.executeUpdate() == 1){
                 updateResult = true;
