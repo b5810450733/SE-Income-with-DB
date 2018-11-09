@@ -40,7 +40,8 @@ public class AccountTest {
     @Test
     void getTotalamount(){
         index.showList();
-        assertEquals(572300,index.getAmount().getTotalAmount());
+        assertEquals(572300,index.getAmount().getTotalAmount()); //เปลี่ยนไปเรื่อยๆ
+        
     }
 
     @Test
@@ -57,10 +58,5 @@ public class AccountTest {
         int index = openDB().readAccount().size();
         assertEquals("200.0",openDB().readAccount().get(index-1).getAmount());
         assertEquals("bag",openDB().readAccount().get(index-1).getInformation());
-    }
-
-    @Test
-    void deleteList(){
-
     }
 }
