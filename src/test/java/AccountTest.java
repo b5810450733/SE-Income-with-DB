@@ -4,6 +4,7 @@ import Controller.IndexController;
 import Model.Amount;
 import Model.Income;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,5 +41,26 @@ public class AccountTest {
     void getTotalamount(){
         index.showList();
         assertEquals(572300,index.getAmount().getTotalAmount());
+    }
+
+    @Test
+    void updateAccount(){
+        Income oldIncome = new Income("Income","soap",150);
+        openDB().addList(oldIncome);
+        //update
+        Income newIncome = oldIncome;
+        newIncome.setType("Income");
+        newIncome.setInformation("bag");
+        newIncome.setAmount("200");
+        newIncome.setID(openDB().getLastID());
+        openDB().updateList(newIncome);
+        int index = openDB().readAccount().size();
+        assertEquals("200.0",openDB().readAccount().get(index-1).getAmount());
+        assertEquals("bag",openDB().readAccount().get(index-1).getInformation());
+    }
+
+    @Test
+    void deleteList(){
+
     }
 }
