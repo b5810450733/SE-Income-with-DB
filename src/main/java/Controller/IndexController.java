@@ -20,11 +20,16 @@ public class IndexController implements Showlist{
     @FXML
     public Label indexBalance;
     public Button enter;
-    private Amount amount = new Amount();
+    public Amount amount = new Amount();
+
+    public Amount getAmount() {
+        return amount;
+    }
 
     public void initialize(){
         try {
             showList();
+            setIndexBalance();
         }catch (NullPointerException e){
             e.printStackTrace();
         }
@@ -61,7 +66,7 @@ public class IndexController implements Showlist{
         Connection connection = db.openDatabase();
         ListControl dbControl = new ListControl(connection);
         ArrayList<Income> incomeList = dbControl.readAccount();
-        Income in = null;
+        Income in;
         for (int i = 0; i < incomeList.size() ; i++) {
             in = new Income(incomeList.get(i).getType(),incomeList.get(i).getInformation(),Double.parseDouble(incomeList.get(i).getAmount()));
             if (in.getType().equals("Income")) {
@@ -70,6 +75,5 @@ public class IndexController implements Showlist{
                 amount.setTotalAmount(0,Double.parseDouble(in.getAmount()));
             }
         }
-        setIndexBalance();
     }
 }
