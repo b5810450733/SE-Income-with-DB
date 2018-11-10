@@ -41,7 +41,7 @@ public class AccountTest {
     void getTotalamount(){
         index.showList();
         assertEquals(572300,index.getAmount().getTotalAmount()); //เปลี่ยนไปเรื่อยๆ
-        
+
     }
 
     @Test
