@@ -5,8 +5,8 @@ Feature: login
 
   Scenario: Add income
     Given A user has 3000 for income
-    When I add income amount 2000
-    Then I have total income 5000
+    When I add income amount 200
+    Then I have total income 3200
 
   Scenario: Spend a money less than income
     Given A user has 3000 for income

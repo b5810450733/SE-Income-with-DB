@@ -25,7 +25,7 @@ public class AccountTest {
         income3 = new Income("Expense","food",1000);
     }
 
-    public ListControl openDB(){
+    public static ListControl openDB(){
         SQLConnect db = new SQLConnect();
         Connection connection = db.openDatabase();
         ListControl addDBControl = new ListControl(connection);

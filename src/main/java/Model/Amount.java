@@ -2,6 +2,8 @@ package Model;
 
 public class Amount {
     private double totalAmount;
+    private double totalExpense;
+    private double lastExpense;
 
     public Amount() {
         this.totalAmount = totalAmount;
@@ -25,6 +27,21 @@ public class Amount {
     }
 
     public void decreseAmount(double i){
-        this.totalAmount -= i;
+        if (i > totalAmount){
+            lastExpense = totalAmount ;
+            totalAmount = 0;
+        }else {
+            this.totalAmount -= i;
+            this.totalExpense += i;
+            lastExpense = i;
+        }
+    }
+
+    public double getTotalExpense() {
+        return totalExpense;
+    }
+
+    public double getLastExpense() {
+        return lastExpense;
     }
 }
